@@ -1,0 +1,53 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+
+
+body {
+    background-color: #7575ff;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    color: #ffff75;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 100px;
+}
+
+#app {
+    height: 100vh;
+    width: 100vw;
+    background-color: #7575ff;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+
+#canvas {
+    height: 600px;
+    width: 600px;
+    margin-top: 20px;
+    position: relative;
+    background-color: #ff7575;
+    border: 7px solid #ff4c4c;
+
+    display: grid;
+    grid-template-columns: repeat(20, 1fr);
+    grid-template-rows: repeat(20, 1fr);
+    
+}
+
+.snake {
+    background-color: #ffff75;
+}
+
+.food {
+    background-color: black;
+}
