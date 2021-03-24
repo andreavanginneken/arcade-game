@@ -507,6 +507,9 @@ function buildSnake() {
     const segmentElement = $(
       `[data-x="${coordinateX}"][data-y="${coordinateY}"]`
     );
+    if (segmentElement.hasClass("snake")) { // you will lose if snake runs into itself
+      clearInterval(game)
+    }
     segmentElement.addClass("snake");
     if (
       newSnakeHeadX > 19 ||
@@ -515,14 +518,9 @@ function buildSnake() {
       newSnakeHeadY < 0
     ) {
       clearInterval(game);
-    } else {}; // we want to lose when it runs into itself
+    }
   });
 }
-
-/* I think we have to make it so:
-- the head of the snake has a different class than the rest of the snake
-- if the head of the snake has the same class as the rest of the snake, the game over
-*/
 
 function buildInitialState() {
   renderState();
@@ -562,7 +560,7 @@ function tick() {
   buildSnake();
 }
 
-// game = setInterval(tick, 1000 / 5);
+game = setInterval(tick, 1000 / 5);
 
 $(window).on("keydown", function (event) {
   if (event.keyCode === 37) {
