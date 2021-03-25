@@ -451,7 +451,7 @@ let snake = {
     [10, 7],
     [10, 8],
   ],
-  nextDirection: [1, 0],
+  nextDirection: [-1, 0],
 };
 
 let food = ["", ""];
@@ -468,11 +468,9 @@ function setRandomFoodCoordinates() {
   food = [`${coordinateX}`, `${coordinateY}`];
 }
 
-setRandomFoodCoordinates();
-
 function renderFood() {
   $(".segment").removeClass("food");
-
+  setRandomFoodCoordinates()
   let foodX = food[0];
   let foodY = food[1];
 
@@ -494,24 +492,29 @@ function buildSnake() {
   const snakeHeadX = snakeHead[0];
   const snakeHeadY = snakeHead[1];
 
+  let snakeHeadElement = $(
+    `[data-x="${snakeHeadX}"][data-y="${snakeHeadY}"]`
+  );
+
   const newSnakeHeadX = snakeHeadX + snake.nextDirection[0];
   const newSnakeHeadY = snakeHeadY + snake.nextDirection[1];
   const newSnakeHead = [newSnakeHeadX, newSnakeHeadY];
+
+  let segmentElement;
   
-  snake.body.unshift(newSnakeHead);
-  snake.body.pop();
   snake.body.forEach(function (coordinates) {
     const coordinateX = coordinates[0];
     const coordinateY = coordinates[1];
 
-    const segmentElement = $(
+    segmentElement = $(
       `[data-x="${coordinateX}"][data-y="${coordinateY}"]`
     );
     if (segmentElement.hasClass("snake")) { // you will lose if snake runs into itself
       clearInterval(game)
     }
+
     segmentElement.addClass("snake");
-    if (
+    if ( // you will lost if snake runs into wall
       newSnakeHeadX > 19 ||
       newSnakeHeadX < 0 ||
       newSnakeHeadY > 19 ||
@@ -519,7 +522,17 @@ function buildSnake() {
     ) {
       clearInterval(game);
     }
-  });
+  })
+
+  if (snakeHeadElement.hasClass("food")) {
+    segmentElement.removeClass("food")
+    snake.body.unshift(newSnakeHead);
+    renderFood()
+  } else { 
+    snake.body.unshift(newSnakeHead);
+    snake.body.pop();
+  }
+  
 }
 
 function buildInitialState() {
@@ -563,17 +576,18 @@ function tick() {
 game = setInterval(tick, 1000 / 5);
 
 $(window).on("keydown", function (event) {
-  if (event.keyCode === 37) {
+  if (event.keyCode === 37 && snake.nextDirection[1] !== 1) {
     snake.nextDirection = [0, -1];
   }
-  if (event.keyCode === 38) {
+  if (event.keyCode === 38 && snake.nextDirection[0] !== 1) {
     snake.nextDirection = [-1, 0];
   }
-  if (event.keyCode === 39) {
+  if (event.keyCode === 39 && snake.nextDirection[1] !== -1) {
     snake.nextDirection = [0, 1];
   }
-  if (event.keyCode === 40) {
+  if (event.keyCode === 40 && snake.nextDirection[0] !== -1) {
     snake.nextDirection = [1, 0];
   }
 });
+
 
