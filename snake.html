@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>Snake</header>
+    <main id="app">
+        <div class="left-column">
+            <!-- <div>Wrap Around</div> -->
+            <button class="slow">SLOW</button>
+            <button class="medium">MEDIUM</button>
+            <button class="fast">FAST</button>
+        </div>
+        <div id="canvas">
+        </div>
+        <div class="right-column">
+            <div>Score</div>
+            <div id="score"> 0 </div>
+            <div id="high-score">High Score</div>
+            <div id="high-score-number"></div>
+            <!-- <div>Average Score</div> -->
+            <!-- <div id="average-score"></div> -->
+        </div>
+    </main>
+    <div class="game-controls">
+        <div class="start">PRESS SPACE TO START</div>
+        <div class="you-lose">YOU LOSE</div>
+        <div class="play-again">PLAY AGAIN?</div>
+    </div>
+    
+
+    <footer></footer>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script defer src="app.js"></script>
+</body>
+</html>
